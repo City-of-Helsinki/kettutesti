@@ -1,0 +1,63 @@
+<!doctype html>
+<html {{wp.language_attributes}} class="no-js">
+
+<head>
+    <meta charset="{{wp.charset}}">
+
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{wp.theme_url}}/img/favicon/apple-touch-icon.png?1">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{wp.theme_url}}/img/favicon/favicon-32x32.png?1">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{wp.theme_url}}/img/favicon/favicon-16x16.png?1">
+    <link rel="manifest" href="{{wp.theme_url}}/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="{{wp.theme_url}}/img/favicon/safari-pinned-tab.svg?1" color="#5bbad5">
+    <link rel="shortcut icon" href="{{wp.theme_url}}/img/favicon/favicon.ico?1">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="{{wp.theme_url}}/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="description" content="{{wp.description}}">
+
+
+    <!-- meta tags -->
+    {{#if this.resultinformation}}
+    <meta property="og:title" content="{{this.kettu.result.title}}">
+    <meta property="og:description" content="{{this.kettu.result.subtitle}}">
+    <meta property="og:url" content="{{this.pageurl}}">
+    <meta property="og:image" content="{{this.kettu-image}}">
+    {{/if}}
+
+    {{do_action 'wp_head'}}
+    <script src="{{wp.js_url}}" type="text/javascript"></script>
+
+</head>
+
+<body class="{{wp.bodyclass}} relative min-h-screen flex flex-col">
+
+<script>
+    var SITE_URL = '{{wp.home_url}}';
+</script>
+
+{{#if wp.maintenance}}
+    <h1 style="width:100%;text-align:center;padding:30% 0 30% 0;">Huoltokatko! Yritä myöhemmin uudelleen</h1>
+{{else}}
+    {{> header.hbs }}
+
+    <main class="site-main tmpl-{{ get_partial_base template_file }}" id="content">
+        {{> (get_partial template_file) }}
+    </main>
+
+
+    {{> footer.hbs }}
+
+    {{do_action 'wp_footer'}}
+{{/if}}
+
+</body>
+
+</html>
