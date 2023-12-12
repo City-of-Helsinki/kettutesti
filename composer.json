@@ -1,4 +1,13 @@
 {
   "name": "miltton/kettutesti",
-  "type": "wordpress-theme"
+  "type": "wordpress-theme",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/zordius/lightncandy.git"
+    }
+  ],
+  "require": {
+    "zordius/lightncandy": "dev-master"
+  }
 }
