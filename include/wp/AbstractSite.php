@@ -27,8 +27,7 @@ abstract class AbstractSite {
 
 		add_action( 'after_setup_theme', [ $this, 'onThemeSupports' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'onEnqueueScripts' ] );
-
-		$this->onEnqueueStyles();
+		add_action( 'wp_enqueue_scripts', [ $this, 'onEnqueueStyles' ] );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'onAdminScripts' ] );
 

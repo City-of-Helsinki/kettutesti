@@ -65,14 +65,8 @@ function kettutesti_log_messages( string ...$message ): void {
 	error_log( implode( PHP_EOL, $message ) );
 }
 
-add_theme_support('post-thumbnails');
-add_theme_support('html5');
-add_theme_support('menus');
-
 require_once 'include/SiteModel.php';
 require_once 'include/Site.php';
-
-
 
 
 global $site;
