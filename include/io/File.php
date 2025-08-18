@@ -117,20 +117,20 @@ class File extends SplFileInfo{
 		return new File( $target,$this->decoder,$this->encoder );
 	}
 
-	
+
 	public function append( $content ){
 		$success = file_put_contents(
 			$this->filePath,
 			$this->getEncoded( $content ),
 			FILE_APPEND
 		);
-		
+
 		if( $success === false ){
 			throw new Error( "Cannot save ".$this->filePath );
 		}
 		return true;
 	}
-	
+
 	public function save( $content, $createDir = false, $createDirMode = 0775 ){
 
 		if( $createDir ){
@@ -165,9 +165,9 @@ class File extends SplFileInfo{
 	}
 
 	// TODO : implement using splinfo instead
-	public function getSize(){
-		return filesize( $this->getFilePath() );
-	}
+	// public function getSize(){
+	// 	return filesize( $this->getFilePath() );
+	// }
 
 	public function exists(){
 		return $this->isFile();
