@@ -128,7 +128,11 @@ abstract class AbstractSiteModel {
 				$attachment = unserialize( $meta['_wp_attachment_metadata'][0] );
 			}
 		} catch ( Error $e ) {
-			ThemeLogger::log( '[!] Cannot unserialize() attachment meta for #' . $id, LogTypes::$ERROR );
+			kettutesti_log_messages(
+				__METHOD__,
+				$e->getMessage(),
+				'[!] Cannot unserialize() attachment meta for #' . $id
+			);
 		}
 
 		if ( empty( $attachment ) ) {
@@ -149,7 +153,11 @@ abstract class AbstractSiteModel {
 
 		$srcset = @wp_get_attachment_image_srcset( $id );
 		if ( $srcset === false ) {
-			ThemeLogger::log( '[!] Cannot get srcset for ' . print_r( $attachment, true ), LogTypes::$ERROR );
+			kettutesti_log_messages(
+				__METHOD__,
+				'[!] Cannot get srcset for ' . print_r( $attachment, true )
+			);
+
 			$this->populateImageAbsUrls( $attachment );
 
 			return $attachment;
@@ -173,7 +181,7 @@ abstract class AbstractSiteModel {
 	 * @return void
 	 */
 	public function preparePageContent( string $template ) {
-		ThemeLogger::log( 'Using template: ' . $template );
+		l( 'Using template: ' . $template );
 
 		if ( $this->isPrepareCalled ) {
 			throw new RuntimeException( 'model->prepare() called more than once' );
@@ -225,9 +233,11 @@ abstract class AbstractSiteModel {
 		$layoutKey = $me['acf_fc_layout'];
 
 		if ( !isset( $this->layoutFiles[$layoutKey] ) ) {
-			$msg = 'Cannot find files for layout "' . $layoutKey . '"' . PHP_EOL;
-			$msg .= 'Registered layout are : ' . implode( ',', $this->layoutFiles );
-			ThemeLogger::log( $msg, LogTypes::$FATAL );
+			kettutesti_log_messages(
+				__METHOD__,
+				'Cannot find files for layout "' . $layoutKey . '"',
+				'Registered layout are : ' . implode( ',', $this->layoutFiles )
+			);
 		}
 
 		$phpPath = $this->layoutFiles[$layoutKey]['requirePath'];
@@ -240,10 +250,13 @@ abstract class AbstractSiteModel {
 		require_once $phpPath;
 
 		if ( !is_callable( $className . '::setup' ) ) {
-			ThemeLogger::log( $className . '::setup() not found or is not callable. Layout php class must implement static setup(&$handlebarsContext)', LogTypes::$FATAL );
+			kettutesti_log_messages(
+				__METHOD__,
+				$className . '::setup() not found or is not callable. Layout php class must implement static setup(&$handlebarsContext)'
+			);
+		} else {
+			$className::setup( $cx, $this );
 		}
-
-		$className::setup( $cx, $this );
 	}
 
 	protected function getMenus() {
