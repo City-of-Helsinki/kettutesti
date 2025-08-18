@@ -1,5 +1,5 @@
 <?php
-ThemeLogger::log( 'Running ' . __FILE__, LogTypes::$INFO );
+l( 'Running ' . __FILE__ );
 global $site;
 
 get_header();

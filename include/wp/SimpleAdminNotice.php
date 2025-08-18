@@ -16,12 +16,12 @@ class SimpleAdminNotice{
 
 		add_action( 'admin_notices', 'SimpleAdminNotice::onAdminNotices', 99 );
 	}
-	
+
 	public static function add( $message ){
 		self::$notices[] = $message;
 		update_option( self::NOTICE_OPTION_KEY, self::$notices );
 	}
-	
+
 
 	public static function onAdminNotices(){
 		foreach( self::$notices as $notice ){
@@ -30,7 +30,11 @@ class SimpleAdminNotice{
 
 		if( !empty( self::$notices ) ){
 			if( !delete_option( self::NOTICE_OPTION_KEY )){
-				ThemeLogger::log("Cannot delete notice; force wp cache clear " . self::NOTICE_OPTION_KEY, LogTypes::$WARNING);
+				kettutesti_log_messages(
+					__METHOD__,
+					"Cannot delete notice; force wp cache clear " . self::NOTICE_OPTION_KEY
+				);
+
 				global $wp_object_cache;
 				return $wp_object_cache->flush();
 			}

@@ -138,21 +138,17 @@ class Site extends AbstractSite {
 	//@override
 	final public function onThemeSupports() {
 		add_filter('use_block_editor_for_post', '__return_false', 10);
-		add_theme_support('automatic-feed-links');
-		add_theme_support('title-tag');
-		add_theme_support('post-thumbnails');
-		add_theme_support(
-			'html5',
-			array(
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-			)
-		);
-		add_theme_support(
-			'post-formats'
-		);
+
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'html5', array(
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+		) );
+		add_theme_support( 'post-formats', array() );
 		add_theme_support('menus');
 	}
 
@@ -269,17 +265,12 @@ class Site extends AbstractSite {
 
 	//@override
 	final public function onEnqueueStyles() {
-		if (is_admin()) {
-			wp_enqueue_style('admin-style', get_template_directory_uri() . '/css/admin-style.css');
-		} else {
-			$css_version = filemtime(get_template_directory() . '/css/tailwind.css');
-			$css_used = '/css/tailwind.css?v=' . $css_version;
+		$css_version = filemtime(get_template_directory() . '/css/tailwind.css');
+		$css_used = '/css/tailwind.css?v=' . $css_version;
 
-
-			wp_enqueue_style('tailwind-css', get_template_directory_uri() . $css_used);
-		}
+		wp_enqueue_style('tailwind-css', get_template_directory_uri() . $css_used);
 	}
-	// 
+	//
 
 	//@override
 	final protected function addPostTypes() {

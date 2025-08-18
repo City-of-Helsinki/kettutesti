@@ -5,15 +5,6 @@ if (!defined('IS_DEV')) {
 }
 
 require_once 'include/vendor/lightncandy/loader.php';
-require_once 'include/io/File.php';
-require_once 'include/debug/ThemeLogger.php';
-
-ThemeLogger::setEnableLogging(true);
-//set_exception_handler( 'ThemeLogger::logException' );
-ThemeLogger::addFormatter(new TimestampFormatter());
-ThemeLogger::addFormatter(new ColorFormatter());
-ThemeLogger::addFormatter(new PaddingFormatter());
-ThemeLogger::addWriter(new LogFileWriter(__DIR__ . '/../../debug.log', 1, 3)); // use wp default log file.
 
 if (is_admin()) {
 	require_once 'include/vendor/class-tgm-plugin-activation.php';
@@ -62,20 +53,19 @@ require_once 'include/net/Session.php';
 require_once 'include/TemplateFunctions.php';
 
 if (!function_exists('l')) {
-	function l($msg)
-	{
-		ThemeLogger::log($msg);
+	function l( string $msg ): void {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( $msg );
+		}
 	}
 }
 
-add_theme_support('post-thumbnails');
-add_theme_support('html5');
-add_theme_support('menus');
+function kettutesti_log_messages( string ...$message ): void {
+	error_log( implode( PHP_EOL, $message ) );
+}
 
 require_once 'include/SiteModel.php';
 require_once 'include/Site.php';
-
-
 
 
 global $site;

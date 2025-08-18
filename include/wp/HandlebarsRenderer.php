@@ -82,7 +82,7 @@ class HandlebarsRenderer implements IRenderer
 			throw new RuntimeException("Template file not found : " . $templatePath);
 		}
 		$template = file_get_contents($templatePath);
-		ThemeLogger::log('Rendering HB template ' . $templatePath, LogTypes::$INFO);
+		l('Rendering HB template ' . $templatePath);
 
 		// need local copy for passing to anonymous function via "use" keyword
 		$partials = $this->partials;
@@ -116,7 +116,7 @@ class HandlebarsRenderer implements IRenderer
 					}
 				},
 				'dump'                    => function ($data) {
-					ThemeLogger::log($data, LogTypes::$DEBUG);
+					l($data);
 
 					return '<pre style="color:#000;background-color:#fff">' . htmlspecialchars(print_r($data, true)) . '</pre>';
 				},
@@ -130,7 +130,7 @@ class HandlebarsRenderer implements IRenderer
 					if (!array_key_exists($fname, $partials)) {
 						throw new Error('Missing (not loaded) partial ' . $fname);
 					}
-					ThemeLogger::log(' > including ' . $fname, LogTypes::$INFO);
+					l(' > including ' . $fname);
 
 					return $fname;
 				},
@@ -169,7 +169,10 @@ class HandlebarsRenderer implements IRenderer
 					$model = &$cx['data']['root']['model'];
 
 					if ($model == null) {
-						ThemeLogger::log('[!] Cannot find model', LogTypes::$ERROR);
+						kettutesti_log_messages(
+							__METHOD__,
+							'[!] Cannot find model'
+						);
 
 						return;
 					}
@@ -249,13 +252,13 @@ class HandlebarsRenderer implements IRenderer
 
 		$templatePath = get_template_directory() . '/templates/' . $templateName;
 		$template = file_get_contents($templatePath);
-		ThemeLogger::log('Rendering simple HB template ' . $templatePath, LogTypes::$INFO);
+		l('Rendering simple HB template ' . $templatePath);
 
 		$phpStr = LightnCandy::compile($template, [
 			'flags'   => LightnCandy::FLAG_ERROR_LOG | LightnCandy::FLAG_ERROR_EXCEPTION | LightnCandy::FLAG_HANDLEBARS | LightnCandy::FLAG_INSTANCE | LightnCandy::FLAG_NOESCAPE,
 			'helpers' => [
 				'dump' => function ($data) {
-					ThemeLogger::log($data, LogTypes::$DEBUG);
+					l($data);
 
 					return '<pre style="color:#000;background-color:#fff">' . htmlspecialchars(print_r($data, true)) . '</pre>';
 				},
