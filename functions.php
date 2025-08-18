@@ -5,7 +5,6 @@ if (!defined('IS_DEV')) {
 }
 
 require_once 'include/vendor/lightncandy/loader.php';
-require_once 'include/io/File.php';
 
 if (is_admin()) {
 	require_once 'include/vendor/class-tgm-plugin-activation.php';
