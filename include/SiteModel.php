@@ -107,10 +107,23 @@ class SiteModel extends AbstractSiteModel
 		];
 	}
 
-	private function overridePost($title)
+	private function overridePost( $title )
 	{
+		$query = new WP_Query( array(
+			'post_type'              => 'page',
+			'title'                  => $title,
+			'post_status'            => 'all',
+			'posts_per_page'         => 1,
+			'no_found_rows'          => true,
+			'ignore_sticky_posts'    => true,
+			'update_post_term_cache' => false,
+			'update_post_meta_cache' => false,
+			'orderby'                => 'post_date ID',
+			'order'                  => 'ASC',
+		) );
+
 		global $post;
-		$post = get_page_by_title($title);
+		$post = $query->posts[0] ?? null;
 	}
 
 	private function populateTerms(&$posts, $taxonomy)
