@@ -1,5 +1,5 @@
 <?php
-l( 'Running ' . __FILE__, LogTypes::$INFO );
+l( 'Running ' . __FILE__ );
 get_header();
 
 global $site;
