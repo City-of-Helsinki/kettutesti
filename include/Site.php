@@ -259,8 +259,8 @@ class Site extends AbstractSite {
 	//@override
 	final public function onEnqueueScripts() {
 		wp_enqueue_script("jquery");
-		wp_enqueue_script("cookie-hub", get_template_directory_uri() . '/src/js/cookieHub.js', false);
-		wp_enqueue_script("cookie-placeholder", get_template_directory_uri() . '/src/js/youtubePlaceholder.js', false);
+		// wp_enqueue_script("cookie-hub", get_template_directory_uri() . '/src/js/cookieHub.js', false);
+		// wp_enqueue_script("cookie-placeholder", get_template_directory_uri() . '/src/js/youtubePlaceholder.js', false);
 	}
 
 	//@override
