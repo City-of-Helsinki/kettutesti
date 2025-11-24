@@ -161,7 +161,7 @@ module.exports = function (grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-dart-sass');
-	grunt.loadNpmTasks('grunt-postcss');
+	grunt.loadNpmTasks('@lodder/grunt-postcss');
 	grunt.loadNpmTasks('grunt-webpack');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
