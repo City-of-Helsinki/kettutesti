@@ -38,9 +38,9 @@ module.exports = {
 	],
 	module: {
 		rules: [{
-			test: /(\.ts$)|(\.js$)/,        // which files to compile
-			loader: 'awesome-typescript-loader',// which loader to use
-
+			test: /(\.ts$)|(\.js$)/, // which files to compile
+			loader: 'ts-loader', // which loader to use
+      exclude: /node_modules/,
 		}],
 	},
 
