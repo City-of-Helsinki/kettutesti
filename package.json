@@ -45,7 +45,6 @@
 		"i": "^0.3.7",
 		"lightbox2": "^2.11.5",
 		"locomotive-scroll": "^4.1.4",
-		"npm": "^11.6.3",
 		"onchange": "^7.1.0"
 	},
 	"browserslist": [
