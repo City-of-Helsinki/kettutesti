@@ -13,8 +13,5 @@
     "./src/ts",
     "./layouts"
     //"./node_modules/@types/googlemaps"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useCache": true
-  }
+  ]
 }
