@@ -153,6 +153,21 @@ class HandlebarsRenderer implements IRenderer
 				'get_the_content'         => function ($action) {
 					return get_the_content();
 				},
+				'loop_the_content'         => function () {
+					ob_start();
+
+					echo '<div class="xm:w-11/12 w-8/12 mx-auto">';
+
+					while( have_posts() ) {
+						the_post();
+
+						the_content();
+					}
+
+					echo '</div>';
+
+					return ob_get_clean();
+				},
 				'get_imageurl_by_post_id' => function ($pid) {
 					return get_the_post_thumbnail_url($pid, 'medium');
 				},
