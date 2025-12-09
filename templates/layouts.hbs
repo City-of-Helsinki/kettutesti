@@ -1,5 +1,13 @@
-{{#each layouts.layouts}}
+{{#if layouts.layouts}}
 
-    {{> (get_partial acf_fc_layout) }}
+  {{#each layouts.layouts}}
 
-{{/each}}
+      {{> (get_partial acf_fc_layout) }}
+
+  {{/each}}
+
+{{else}}
+
+  {{ loop_the_content }}
+
+{{/if}}
